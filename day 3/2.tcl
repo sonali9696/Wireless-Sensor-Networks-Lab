@@ -12,13 +12,13 @@ set opt(seed)           0.0
 set opt(nn)             100
 set opt(connections)    50
 
-set opt(stop)           50.0
-set opt(dataRate)       0.2
+set opt(stop)           50
+set opt(dataRate)       [expr 1.0*256*8]
 set opt(adhocRouting)   AODV
 
 set ns_		[new Simulator]
 set topo	[new Topography]
-set opt(fn) "50_0.2_AODV"
+set opt(fn) "2"
 set tracefd	[open $opt(fn).tr w]
 set namtrace    [open $opt(fn).nam w]
 
@@ -28,7 +28,7 @@ $ns_ namtrace-all-wireless $namtrace $opt(x) $opt(y)
 # declare finish program
 proc finish {} {
 	global ns_ tracefd namtrace
-	$ns_ flush-trace 
+	$ns_ flush-trace
 	close $tracefd
 	close $namtrace
 	#exec nam $namtrace
@@ -56,11 +56,11 @@ $ns_ node-config -adhocRouting $opt(adhocRouting) \
 		 		 -agentTrace ON \
                  -movementTrace ON \
                  -routerTrace ON \
-                 -macTrace ON 
+                 -macTrace ON
 
-#  Create the specified number of nodes [$opt(nn)] and "attach" them to the channel. 
+#  Create the specified number of nodes [$opt(nn)] and "attach" them to the channel.
 for {set i 0} {$i < $opt(nn) } {incr i} {
-	set node_($i) [$ns_ node]	
+	set node_($i) [$ns_ node]
 	$node_($i) random-motion 1		;# disable random motion
 }
 
@@ -79,9 +79,9 @@ for {set i 0} {$i < $opt(connections)} {incr i} {
 
     #Setup a UDP connection
     set udp_($i) [new Agent/UDP]
-    $ns_ attach-agent $node_([expr int(rand()*100)]) $udp_($i)
+    $ns_ attach-agent $node_($i) $udp_($i)
     set null_($i) [new Agent/Null]
-    $ns_ attach-agent $node_([expr int(rand()*100)]) $null_($i)
+    $ns_ attach-agent $node_([expr $i+2]) $null_($i)
     $ns_ connect $udp_($i) $null_($i)
 
     #Setup a CBR over UDP connection
@@ -93,24 +93,23 @@ for {set i 0} {$i < $opt(connections)} {incr i} {
     $cbr_($i) set random_ false
 
     $ns_ at 0.0 "$cbr_($i) start"
+    $ns_ at $opt(stop) "$cbr_($i) stop"
 }
 
 # random motion
-#for {set i 0} {$i < $opt(nn)} {incr i} {
-#    set xx_ [expr rand()*$opt(x)]
-#    set yy_ [expr rand()*$opt(y)]
-#    set rng_time [expr rand()*$opt(stop)]
-#    $ns_ at $rng_time "$node_($i) setdest $xx_ $yy_ 15.0"   ;
-#}
+for {set j 0} {$j < 10} {incr j} {
+    for {set i 0} {$i < $opt(nn)} {incr i} {
+        set xx_ [expr rand()*$opt(x)]
+        set yy_ [expr rand()*$opt(y)]
+        set rng_time [expr rand()*$opt(stop)]
+        $ns_ at $rng_time "$node_($i) setdest $xx_ $yy_ 15.0"   ;
+    }
+}
 
 # Tell nodes when the simulation ends
 for {set i 0} {$i < $opt(nn) } {incr i} {
-    $ns_ at $opt(stop).0 "$node_($i) reset";
+    $ns_ at $opt(stop) "$node_($i) reset";
 }
-
-$ns_ at  $opt(stop).0002 "puts \"NS EXITING...\" ;"
-puts "Starting Simulation..."
 
 $ns_ at $opt(stop) "finish"
 $ns_ run
-

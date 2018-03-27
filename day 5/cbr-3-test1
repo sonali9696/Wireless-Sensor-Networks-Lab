@@ -1,0 +1,13 @@
+#
+# 0 connecting to 2 at time 127.93667922166023
+#
+
+set tcp [new Agent/TCP]
+$tcp set class_ 2
+set sink [new Agent/TCPSink]
+$ns_ attach-agent $node_(0) $tcp
+$ns_ attach-agent $node_(1) $sink
+$ns_ connect $tcp $sink
+set ftp [new Application/FTP]
+$ftp attach-agent $tcp
+$ns_ at 10.00000000000000 "$ftp start"
