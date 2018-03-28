@@ -1,0 +1,87 @@
+diff -Naur ns-allinone-2.35/ns-2.35/aodv/aodv.cc ns-allinone-2.35-modified/ns-2.35/aodv/aodv.cc
+--- ns-allinone-2.35/ns-2.35/aodv/aodv.cc	2010-04-30 22:40:36.000000000 +0530
++++ ns-allinone-2.35-modified/ns-2.35/aodv/aodv.cc	2014-05-23 22:16:05.000000000 +0530
+@@ -82,6 +82,13 @@
+       return TCL_OK;
+     }
+     
++// Added for Blackhole Attack - Mohit P. Tahiliani - Ref.: elmurod.net [Code Starts]
++    if(strncasecmp(argv[1], "hacker", 6) == 0) {
++     malicious = true;
++      return TCL_OK;
++    }
++// Added for Blackhole Attack - Mohit P. Tahiliani - Ref.: elmurod.net [Code Ends]
++  
+     if(strncasecmp(argv[1], "start", 2) == 0) {
+       btimer.handle((Event*) 0);
+ 
+@@ -144,7 +151,9 @@
+   seqno = 2;
+   bid = 1;
+ 
+-  LIST_INIT(&nbhead);
++  malicious = false; // Added for Blackhole Attack - Mohit P. Tahiliani - Ref.: elmurod.net
++
++LIST_INIT(&nbhead);
+   LIST_INIT(&bihead);
+ 
+   logtarget = 0;
+@@ -439,6 +448,14 @@
+ struct hdr_ip *ih = HDR_IP(p);
+ aodv_rt_entry *rt;
+ 
++// Added for Blackhole Attack - Mohit P. Tahiliani - Ref.: elmurod.net [Code Starts]
++// If the node is a malicious node - drop the packet and specify a reason for dropping it! (Can't openly say you are malicious :-) )
++	 if (malicious == true ) {
++	    drop(p, DROP_RTR_ROUTE_LOOP); // DROP_RTR_ROUTE_LOOP is added for no reason.
++	    return;
++	 }
++// Added for Blackhole Attack - Mohit P. Tahiliani - Ref.: elmurod.net [Code Ends]
++
+  /*
+   *  Set the transmit failure callback.  That
+   *  won't change.
+@@ -758,6 +775,7 @@
+    seqno = max(seqno, rq->rq_dst_seqno)+1;
+    if (seqno%2) seqno++;
+ 
++
+    sendReply(rq->rq_src,           // IP Destination
+              1,                    // Hop Count
+              index,                // Dest IP Address
+@@ -767,8 +785,23 @@
+  
+    Packet::free(p);
+  }
++ 
++// Added for Blackhole Attack - Mohit P. Tahiliani - Ref.: elmurod.net [Code Starts]
++ else if (malicious == true) {
++    seqno = max(seqno, rq->rq_dst_seqno)+1;
++    if (seqno%2) seqno++;
++
++    sendReply(rq->rq_src,           // IP Destination
++             1,                     // Hop Count is set to 1 to confuse the source node!
++             rq->rq_dst, 	    // Dest IP Address
++             seqno, 		    // Dest Sequence Num
++             MY_ROUTE_TIMEOUT,	    // Lifetime
++             rq->rq_timestamp);     // timestamp
++   Packet::free(p);
++ }
++// Added for Blackhole Attack - Mohit P. Tahiliani - Ref.: elmurod.net [Code Ends] 
+ 
+- // I am not the destination, but I may have a fresh enough route.
++// I am not the destination, but I may have a fresh enough route.
+ 
+  else if (rt && (rt->rt_hops != INFINITY2) && 
+ 	  	(rt->rt_seqno >= rq->rq_dst_seqno) ) {
+diff -Naur ns-allinone-2.35/ns-2.35/aodv/aodv.h ns-allinone-2.35-modified/ns-2.35/aodv/aodv.h
+--- ns-allinone-2.35/ns-2.35/aodv/aodv.h	2005-08-03 01:18:51.000000000 +0530
++++ ns-allinone-2.35-modified/ns-2.35/aodv/aodv.h	2014-05-23 21:02:55.000000000 +0530
+@@ -273,6 +273,7 @@
+ 	 */
+ 	
+ 	double 		PerHopTime(aodv_rt_entry *rt);
++	bool		malicious; // Added for Blackhole Attack - Mohit P. Tahiliani - Ref.: elmurod.net
+ 
+ 
+         nsaddr_t        index;                  // IP Address of this node

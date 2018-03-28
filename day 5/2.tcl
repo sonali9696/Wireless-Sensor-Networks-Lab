@@ -1,0 +1,124 @@
+set val(chan)       Channel/WirelessChannel
+set val(prop)       Propagation/TwoRayGround
+set val(netif)      Phy/WirelessPhy
+set val(mac)        Mac/802_11
+set val(ifq)        Queue/DropTail/PriQueue
+set val(ll)         LL
+set val(ant)        Antenna/OmniAntenna
+set val(x)              670   ;# X dimension of the topography
+set val(y)              670   ;# Y dimension of the topography
+set val(ifqlen)         50            ;# max packet in ifq
+set val(seed)           0.0
+set val(adhocRouting)   DSR
+set val(nn)             20             ;# how many nodes are simulated
+set val(transmissionRange)             150             ;# transmissionRange
+set val(cp)             "cbr-3-test" 
+set val(sc)             "scen-3-test" 
+set val(stop)           400.0           ;# simulation time
+
+set ns_		[new Simulator]
+set topo	[new Topography]
+set tracefd	[open d2q1.tr w]
+set namtrace    [open d2q1.nam w]
+
+$ns_ trace-all $tracefd
+$ns_ namtrace-all-wireless $namtrace $val(x) $val(y)
+
+# declare finish program
+proc finish {} {
+	global ns_ tracefd namtrace
+	$ns_ flush-trace 
+	close $tracefd
+	close $namtrace
+	exec nam d2q1.nam & 
+	exit 0
+}
+
+# define topology
+$topo load_flatgrid $val(x) $val(y)
+
+# Create God
+set god_ [create-god $val(nn)]
+
+# define how node should be created
+#global node setting
+$ns_ node-config -adhocRouting $val(adhocRouting) \
+                 -llType $val(ll) \
+                 -macType $val(mac) \
+                 -ifqType $val(ifq) \
+                 -ifqLen $val(ifqlen) \
+                 -antType $val(ant) \
+                 -propType $val(prop) \
+                 -phyType $val(netif) \
+                 -channelType $val(chan) \
+		 		 -topoInstance $topo \
+		 		 -agentTrace ON \
+                 -routerTrace OFF \
+                 -macTrace OFF 
+
+#  Create the specified number of nodes [$val(nn)] and "attach" them to the channel. 
+for {set i 0} {$i < $val(nn) } {incr i} {
+	set node_($i) [$ns_ node]	
+	$node_($i) random-motion 0		;# disable random motion
+}
+
+
+# Define node movement model and traffic model
+source $val(cp)
+source $val(sc)
+
+
+set r [open distance.tr w]
+#Random location set for each node
+for {set i 0} {$i < $val(nn)} {incr i} {
+	set xx($i) [expr rand()*200]
+	set yy($i) [expr rand()*200]
+
+	$node_($i) set X_ $xx($i)
+	$node_($i) set Y_ $yy($i)
+	$node_($i) set Z_ 0
+}
+
+
+for {set i 0} {$i < $val(nn) } { incr i } {
+puts "\n"
+#puts $r "\n"
+
+for {set j 0} {$j < $val(nn) } { incr j } {
+
+set dx [expr $xx($i) - $xx($j)]
+set dy [expr $yy($i) - $yy($j)]
+
+set dx2 [expr $dx * $dx]
+set dy2 [expr $dy * $dy]
+
+set h2 [expr $dx2 + $dy2]
+
+set h($i-$j) [expr pow($h2, 0.5)]
+
+if {$h($i-$j) < 150 } {
+	puts "distance of node($i) from node($j) = $h($i-$j). Neighbour"
+} else {
+	puts "distance of node($i) from node($j) = $h($i-$j). Not a neighbour"
+}
+
+}
+}
+
+
+
+
+# Tell nodes when the simulation ends
+for {set i 0} {$i < $val(nn) } {incr i} {
+    $ns_ at $val(stop).0 "$node_($i) reset";
+}
+
+$ns_ at  $val(stop).0002
+puts $tracefd "M 0.0 nn $val(nn) x $val(x) y $val(y) rp $val(adhocRouting)"
+puts $tracefd "M 0.0 sc $val(sc) cp $val(cp) seed $val(seed)"
+puts $tracefd "M 0.0 prop $val(prop) ant $val(ant)"
+
+puts "Starting Simulation..."
+
+$ns_ at 500.0 "finish"
+$ns_ run

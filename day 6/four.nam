@@ -1,0 +1,131 @@
+n -t * -s 0  -x 5 -y 2 -Z 0 -z 40  -v circle -c black
+n -t * -s 1  -x 390 -y 385 -Z 0 -z 40  -v circle -c black
+V -t * -v 1.0a5 -a 0
+W -t * -x 670 -y 670
+A -t * -n 1 -p 0 -o 0x7fffffff -c 30 -a 1
+A -t * -h 1 -m 1073741823 -s 0
++ -t 0.000821201 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 0 -k RTR 
+- -t 0.000821201 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 0 -k RTR
+h -t 0.000821201 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 0 -k RTR
++ -t 1.114891050 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 1 -k RTR 
+- -t 1.114891050 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 1 -k RTR
+h -t 1.114891050 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 1 -k RTR
++ -t 11.584229962 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 2 -k RTR 
+- -t 11.584229962 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 2 -k RTR
+h -t 11.584229962 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 2 -k RTR
++ -t 15.429947301 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 3 -k RTR 
+- -t 15.429947301 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 3 -k RTR
+h -t 15.429947301 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 3 -k RTR
++ -t 25.969100488 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 4 -k RTR 
+- -t 25.969100488 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 4 -k RTR
+h -t 25.969100488 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 4 -k RTR
++ -t 27.102908436 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 5 -k RTR 
+- -t 27.102908436 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 5 -k RTR
+h -t 27.102908436 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 5 -k RTR
++ -t 37.577296208 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 6 -k RTR 
+- -t 37.577296208 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 6 -k RTR
+h -t 37.577296208 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 6 -k RTR
++ -t 39.885311098 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 7 -k RTR 
+- -t 39.885311098 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 7 -k RTR
+h -t 39.885311098 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 7 -k RTR
+n -t 50.000000 -s 1 -x 390.000000 -y 385.000000 -U -31.819805 -V -31.819805 -T 10.842304
++ -t 50.300000000 -s 0 -d -1 -p udp -e 500 -c 2 -a 0 -i 8 -k AGT 
+- -t 50.300000000 -s 0 -d -1 -p udp -e 500 -c 2 -a 0 -i 8 -k AGT
+h -t 50.300000000 -s 0 -d -1 -p udp -e 500 -c 2 -a 0 -i 8 -k AGT
++ -t 52.062174898 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 9 -k RTR 
+- -t 52.062174898 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 9 -k RTR
+h -t 52.062174898 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 9 -k RTR
++ -t 54.326422064 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 10 -k RTR 
+- -t 54.326422064 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 10 -k RTR
+h -t 54.326422064 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 10 -k RTR
++ -t 64.824942296 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 11 -k RTR 
+- -t 64.824942296 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 11 -k RTR
+h -t 64.824942296 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 11 -k RTR
+r -t 64.825882480 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 11 -k RTR
++ -t 68.905818337 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 12 -k RTR 
+- -t 68.905818337 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 12 -k RTR
+h -t 68.905818337 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 12 -k RTR
+r -t 68.906818521 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 12 -k RTR
++ -t 68.906818521 -s 0 -d 1 -p udp -e 540 -c 2 -a 0 -i 8 -k RTR 
+- -t 68.906818521 -s 0 -d 1 -p udp -e 540 -c 2 -a 0 -i 8 -k RTR
+h -t 68.906818521 -s 0 -d 1 -p udp -e 540 -c 2 -a 0 -i 8 -k RTR
+r -t 68.915850809 -s 1 -d 1 -p udp -e 540 -c 2 -a 0 -i 8 -k AGT
+v -t 68.915850808761 -e sim_annotation 68.915850808761 1 1 received {how are you}
+v -t 68.915850808761 -e sim_annotation 68.915850808761 2 Replying correct question for recieved data:{how are you}
+v -t 68.915850808761 -e sim_annotation 68.915850808761 3 question: how are you answer: fine
++ -t 70.500000000 -s 1 -d -1 -p udp -e 828 -c 2 -a 0 -i 13 -k AGT 
+- -t 70.500000000 -s 1 -d -1 -p udp -e 828 -c 2 -a 0 -i 13 -k AGT
+h -t 70.500000000 -s 1 -d -1 -p udp -e 828 -c 2 -a 0 -i 13 -k AGT
++ -t 70.500000000 -s 1 -d 0 -p udp -e 848 -c 2 -a 0 -i 13 -k RTR 
+- -t 70.500000000 -s 1 -d 0 -p udp -e 848 -c 2 -a 0 -i 13 -k RTR
+h -t 70.500000000 -s 1 -d 0 -p udp -e 848 -c 2 -a 0 -i 13 -k RTR
+r -t 70.508104552 -s 0 -d 0 -p udp -e 848 -c 2 -a 0 -i 13 -k AGT
+v -t 70.5081045517246 -e sim_annotation 70.5081045517246 4 0 received {hi}
+v -t 70.5081045517246 -e sim_annotation 70.5081045517246 5 Replying correct question for recieved data:{hi}
+v -t 70.5081045517246 -e sim_annotation 70.5081045517246 6 question: hi answer: Thanks
++ -t 76.294693978 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 14 -k RTR 
+- -t 76.294693978 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 14 -k RTR
+h -t 76.294693978 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 14 -k RTR
+r -t 76.295910162 -s 1 -d -1 -p message -e 44 -c 2 -a 0 -i 14 -k RTR
++ -t 80.000000000 -s 1 -d -1 -p udp -e 828 -c 2 -a 0 -i 16 -k AGT 
+- -t 80.000000000 -s 1 -d -1 -p udp -e 828 -c 2 -a 0 -i 16 -k AGT
+h -t 80.000000000 -s 1 -d -1 -p udp -e 828 -c 2 -a 0 -i 16 -k AGT
++ -t 80.000000000 -s 1 -d 0 -p udp -e 848 -c 2 -a 0 -i 16 -k RTR 
+- -t 80.000000000 -s 1 -d 0 -p udp -e 848 -c 2 -a 0 -i 16 -k RTR
+h -t 80.000000000 -s 1 -d 0 -p udp -e 848 -c 2 -a 0 -i 16 -k RTR
++ -t 80.000000000 -s 0 -d -1 -p udp -e 828 -c 2 -a 0 -i 17 -k AGT 
+- -t 80.000000000 -s 0 -d -1 -p udp -e 828 -c 2 -a 0 -i 17 -k AGT
+h -t 80.000000000 -s 0 -d -1 -p udp -e 828 -c 2 -a 0 -i 17 -k AGT
++ -t 80.000000000 -s 0 -d 1 -p udp -e 848 -c 2 -a 0 -i 17 -k RTR 
+- -t 80.000000000 -s 0 -d 1 -p udp -e 848 -c 2 -a 0 -i 17 -k RTR
+h -t 80.000000000 -s 0 -d 1 -p udp -e 848 -c 2 -a 0 -i 17 -k RTR
+r -t 80.008044552 -s 0 -d 0 -p udp -e 848 -c 2 -a 0 -i 16 -k AGT
+v -t 80.0080445517246 -e sim_annotation 80.0080445517246 7 0 received {replied:fine}
+v -t 80.0080445517246 -e sim_annotation 80.0080445517246 8 Answer not found in database
+r -t 80.016793103 -s 1 -d 1 -p udp -e 848 -c 2 -a 0 -i 17 -k AGT
+v -t 80.0167931034491 -e sim_annotation 80.0167931034491 9 1 received {replied:Thanks}
+v -t 80.0167931034491 -e sim_annotation 80.0167931034491 10 Answer not found in database
++ -t 80.615013388 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 18 -k RTR 
+- -t 80.615013388 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 18 -k RTR
+h -t 80.615013388 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 18 -k RTR
+r -t 80.616293572 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 18 -k RTR
++ -t 90.491862456 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 19 -k RTR 
+- -t 90.491862456 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 19 -k RTR
+h -t 90.491862456 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 19 -k RTR
+r -t 90.492858640 -s 1 -d -1 -p message -e 44 -c 2 -a 0 -i 19 -k RTR
++ -t 93.716200209 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 20 -k RTR 
+- -t 93.716200209 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 20 -k RTR
+h -t 93.716200209 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 20 -k RTR
+r -t 93.717360393 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 20 -k RTR
++ -t 104.498986318 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 21 -k RTR 
+- -t 104.498986318 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 21 -k RTR
+h -t 104.498986318 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 21 -k RTR
+r -t 104.500482502 -s 1 -d -1 -p message -e 44 -c 2 -a 0 -i 21 -k RTR
++ -t 108.349318954 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 22 -k RTR 
+- -t 108.349318954 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 22 -k RTR
+h -t 108.349318954 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 22 -k RTR
+r -t 108.350679138 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 22 -k RTR
++ -t 118.504027062 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 23 -k RTR 
+- -t 118.504027062 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 23 -k RTR
+h -t 118.504027062 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 23 -k RTR
+r -t 118.505283246 -s 1 -d -1 -p message -e 44 -c 2 -a 0 -i 23 -k RTR
++ -t 122.652170393 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 24 -k RTR 
+- -t 122.652170393 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 24 -k RTR
+h -t 122.652170393 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 24 -k RTR
+r -t 122.653170576 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 24 -k RTR
++ -t 131.285562263 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 25 -k RTR 
+- -t 131.285562263 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 25 -k RTR
+h -t 131.285562263 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 25 -k RTR
+r -t 131.286598447 -s 1 -d -1 -p message -e 44 -c 2 -a 0 -i 25 -k RTR
++ -t 134.215064239 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 26 -k RTR 
+- -t 134.215064239 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 26 -k RTR
+h -t 134.215064239 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 26 -k RTR
+r -t 134.216024423 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 26 -k RTR
++ -t 142.657472522 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 27 -k RTR 
+- -t 142.657472522 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 27 -k RTR
+h -t 142.657472522 -s 0 -d -1 -p message -e 44 -c 2 -a 0 -i 27 -k RTR
+r -t 142.658888706 -s 1 -d -1 -p message -e 44 -c 2 -a 0 -i 27 -k RTR
++ -t 146.677689853 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 28 -k RTR 
+- -t 146.677689853 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 28 -k RTR
+h -t 146.677689853 -s 1 -d -1 -p message -e 32 -c 2 -a 0 -i 28 -k RTR
+r -t 146.678770037 -s 0 -d -1 -p message -e 32 -c 2 -a 0 -i 28 -k RTR
