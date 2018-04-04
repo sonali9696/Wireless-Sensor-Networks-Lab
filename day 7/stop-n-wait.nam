@@ -1,0 +1,101 @@
+V -t * -v 1.0a5 -a 1 -c 1 -F 1 -M 2
+c -t * -i 0 -n black
+N -t * -S 0 -n {TCP session  between node 0.0 and node 1.0} -p TCP  -m {}
+N -t * -S 0 -h 6
+N -t * -F 0 -M 0 -n tcp
+N -t * -F 0 -M 1 -n ack
+A -t * -n 1 -p 0 -o 0x7fffffff -c 30 -a 1
+A -t * -h 1 -m 1073741823 -s 0
+n -t * -a 0 -s 0 -S UP -v circle -c black -i black
+n -t * -a 1 -s 1 -S UP -v circle -c black -i black
+l -t * -s 0 -d 1 -S UP -r 200000 -D 0.20000000000000001 -c black -o right
+a -t 0 -s 0 -d 1 -n tcp
+v -t 0 -e monitor_agent 0 tcp
+n -t 0 -s 0 -S DLABEL -l "Sender" -L ""
+n -t 0 -s 1 -S DLABEL -l "Receiver" -L ""
+v -t 0 -e sim_annotation 0 1 Stop and Wait with normal operation
+v -t 0.05 -e sim_annotation 0.05 2 FTP starts at 0.1
++ -t 0.1 -s 0 -d 1 -p tcp -e 40 -c 0 -i 0 -a 0 -S 0 -f 0 -m 0 -y {0 0}
+- -t 0.1 -s 0 -d 1 -p tcp -e 40 -c 0 -i 0 -a 0 -S 0 -y {0 0}
+h -t 0.1 -s 0 -d 1 -p tcp -e 40 -c 0 -i 0 -a 0 -S 0 -y {-1 -1}
+v -t 0.11 -e sim_annotation 0.11 3 Send Packet_0
+r -t 0.3016 -s 0 -d 1 -p tcp -e 40 -c 0 -i 0 -a 0 -S 0 -y {0 0}
++ -t 0.3016 -s 1 -d 0 -p ack -e 40 -c 0 -i 1 -a 0 -S 0 -y {0 0}
+- -t 0.3016 -s 1 -d 0 -p ack -e 40 -c 0 -i 1 -a 0 -S 0 -f 0 -m 1 -y {0 0}
+h -t 0.3016 -s 1 -d 0 -p ack -e 40 -c 0 -i 1 -a 0 -S 0 -y {-1 -1}
+v -t 0.35 -e sim_annotation 0.35 4 Receive Ack_0
+r -t 0.5032 -s 1 -d 0 -p ack -e 40 -c 0 -i 1 -a 0 -S 0 -y {0 0}
+f -t 0.5032 -s 0 -d 1 -n cwnd_ -a tcp -v 2 -T v
+f -t 0.5032 -s 0 -d 1 -n cwnd_ -a tcp -v 1 -o 2 -T v
+f -t 0.5032 -s 0 -d 1 -n cwnd_ -a tcp -v 2 -o 1 -T v
++ -t 0.5032 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 2 -a 0 -S 0 -f 0 -m 0 -y {1 1}
+- -t 0.5032 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 2 -a 0 -S 0 -y {1 1}
+h -t 0.5032 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 2 -a 0 -S 0 -y {-1 -1}
+v -t 0.56 -e sim_annotation 0.56 5 Send Packet_1
+r -t 0.7448 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 2 -a 0 -S 0 -y {1 1}
++ -t 0.7448 -s 1 -d 0 -p ack -e 40 -c 0 -i 3 -a 0 -S 0 -y {1 1}
+- -t 0.7448 -s 1 -d 0 -p ack -e 40 -c 0 -i 3 -a 0 -S 0 -f 0 -m 1 -y {1 1}
+h -t 0.7448 -s 1 -d 0 -p ack -e 40 -c 0 -i 3 -a 0 -S 0 -y {-1 -1}
+v -t 0.79 -e sim_annotation 0.79 6 Receive Ack_1
+r -t 0.9464 -s 1 -d 0 -p ack -e 40 -c 0 -i 3 -a 0 -S 0 -y {1 1}
+f -t 0.9464 -s 0 -d 1 -n cwnd_ -a tcp -v 2.5 -o 2 -T v
+f -t 0.9464 -s 0 -d 1 -n cwnd_ -a tcp -v 1 -o 2.5 -T v
++ -t 0.9464 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 4 -a 0 -S 0 -f 0 -m 0 -y {2 2}
+- -t 0.9464 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 4 -a 0 -S 0 -y {2 2}
+h -t 0.9464 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 4 -a 0 -S 0 -y {-1 -1}
+v -t 0.99 -e sim_annotation 0.99 7 Send Packet_2
+r -t 1.188 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 4 -a 0 -S 0 -y {2 2}
++ -t 1.188 -s 1 -d 0 -p ack -e 40 -c 0 -i 5 -a 0 -S 0 -y {2 2}
+- -t 1.188 -s 1 -d 0 -p ack -e 40 -c 0 -i 5 -a 0 -S 0 -f 0 -m 1 -y {2 2}
+h -t 1.188 -s 1 -d 0 -p ack -e 40 -c 0 -i 5 -a 0 -S 0 -y {-1 -1}
+v -t 1.23 -e sim_annotation 1.23 8 Receive Ack_2  
+r -t 1.3896 -s 1 -d 0 -p ack -e 40 -c 0 -i 5 -a 0 -S 0 -y {2 2}
+f -t 1.3896 -s 0 -d 1 -n cwnd_ -a tcp -v 2 -o 1 -T v
+f -t 1.3896 -s 0 -d 1 -n cwnd_ -a tcp -v 1 -o 2 -T v
++ -t 1.3896 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 6 -a 0 -S 0 -f 0 -m 0 -y {3 3}
+- -t 1.3896 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 6 -a 0 -S 0 -y {3 3}
+h -t 1.3896 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 6 -a 0 -S 0 -y {-1 -1}
+v -t 1.43 -e sim_annotation 1.43 9 Send Packet_3
+r -t 1.6312 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 6 -a 0 -S 0 -y {3 3}
++ -t 1.6312 -s 1 -d 0 -p ack -e 40 -c 0 -i 7 -a 0 -S 0 -y {3 3}
+- -t 1.6312 -s 1 -d 0 -p ack -e 40 -c 0 -i 7 -a 0 -S 0 -f 0 -m 1 -y {3 3}
+h -t 1.6312 -s 1 -d 0 -p ack -e 40 -c 0 -i 7 -a 0 -S 0 -y {-1 -1}
+v -t 1.67 -e sim_annotation 1.67 10 Receive Ack_3
+r -t 1.8328 -s 1 -d 0 -p ack -e 40 -c 0 -i 7 -a 0 -S 0 -y {3 3}
+f -t 1.8328 -s 0 -d 1 -n cwnd_ -a tcp -v 2 -o 1 -T v
+f -t 1.8328 -s 0 -d 1 -n cwnd_ -a tcp -v 1 -o 2 -T v
++ -t 1.8328 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 8 -a 0 -S 0 -f 0 -m 0 -y {4 4}
+- -t 1.8328 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 8 -a 0 -S 0 -y {4 4}
+h -t 1.8328 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 8 -a 0 -S 0 -y {-1 -1}
+v -t 1.88 -e sim_annotation 1.88 11 Send Packet_4
+r -t 2.0744 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 8 -a 0 -S 0 -y {4 4}
++ -t 2.0744 -s 1 -d 0 -p ack -e 40 -c 0 -i 9 -a 0 -S 0 -y {4 4}
+- -t 2.0744 -s 1 -d 0 -p ack -e 40 -c 0 -i 9 -a 0 -S 0 -f 0 -m 1 -y {4 4}
+h -t 2.0744 -s 1 -d 0 -p ack -e 40 -c 0 -i 9 -a 0 -S 0 -y {-1 -1}
+v -t 2.11 -e sim_annotation 2.11 12 Receive Ack_4
+r -t 2.276 -s 1 -d 0 -p ack -e 40 -c 0 -i 9 -a 0 -S 0 -y {4 4}
+f -t 2.276 -s 0 -d 1 -n cwnd_ -a tcp -v 2 -o 1 -T v
+f -t 2.276 -s 0 -d 1 -n cwnd_ -a tcp -v 1 -o 2 -T v
++ -t 2.276 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 10 -a 0 -S 0 -f 0 -m 0 -y {5 5}
+- -t 2.276 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 10 -a 0 -S 0 -y {5 5}
+h -t 2.276 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 10 -a 0 -S 0 -y {-1 -1}
+v -t 2.32 -e sim_annotation 2.32 13 Send Packet_5
+r -t 2.5176 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 10 -a 0 -S 0 -y {5 5}
++ -t 2.5176 -s 1 -d 0 -p ack -e 40 -c 0 -i 11 -a 0 -S 0 -y {5 5}
+- -t 2.5176 -s 1 -d 0 -p ack -e 40 -c 0 -i 11 -a 0 -S 0 -f 0 -m 1 -y {5 5}
+h -t 2.5176 -s 1 -d 0 -p ack -e 40 -c 0 -i 11 -a 0 -S 0 -y {-1 -1}
+v -t 2.55 -e sim_annotation 2.55 14 Receive Ack_5    
+r -t 2.7192 -s 1 -d 0 -p ack -e 40 -c 0 -i 11 -a 0 -S 0 -y {5 5}
+f -t 2.7192 -s 0 -d 1 -n cwnd_ -a tcp -v 2 -o 1 -T v
+f -t 2.7192 -s 0 -d 1 -n cwnd_ -a tcp -v 1 -o 2 -T v
++ -t 2.7192 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 12 -a 0 -S 0 -f 0 -m 0 -y {6 6}
+- -t 2.7192 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 12 -a 0 -S 0 -y {6 6}
+h -t 2.7192 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 12 -a 0 -S 0 -y {-1 -1}
+v -t 2.75 -e sim_annotation 2.75 15 Send Packet_6
+r -t 2.9608 -s 0 -d 1 -p tcp -e 1040 -c 0 -i 12 -a 0 -S 0 -y {6 6}
++ -t 2.9608 -s 1 -d 0 -p ack -e 40 -c 0 -i 13 -a 0 -S 0 -y {6 6}
+- -t 2.9608 -s 1 -d 0 -p ack -e 40 -c 0 -i 13 -a 0 -S 0 -f 0 -m 1 -y {6 6}
+h -t 2.9608 -s 1 -d 0 -p ack -e 40 -c 0 -i 13 -a 0 -S 0 -y {-1 -1}
+v -t 2.99 -e sim_annotation 2.99 16 Receive Ack_6
+v -t 3.1 -e sim_annotation 3.1 17 FTP stops
+r -t 3.1624 -s 1 -d 0 -p ack -e 40 -c 0 -i 13 -a 0 -S 0 -y {6 6}

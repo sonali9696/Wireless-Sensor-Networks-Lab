@@ -1,3 +1,17 @@
+# This script is created by NSG2 beta1
+# <http://wushoupong.googlepages.com/nsg>
+
+##################################################################
+# Modified by Mohit P. Tahiliani and Gaurav Gupta		 #
+# Department of Computer Science and Engineering		 #
+# N.I.T.K., Surathkal				 		 #
+# tahiliani.nitk@gmail.com					 #
+# www.mohittahiliani.blogspot.com				 #
+##################################################################
+
+#===================================
+#     Simulation parameters setup
+#===================================
 set val(chan)   Channel/WirelessChannel    ;# channel type
 set val(prop)   Propagation/TwoRayGround   ;# radio-propagation model
 set val(netif)  Phy/WirelessPhy            ;# network interface type
@@ -6,10 +20,10 @@ set val(ifq)    Queue/DropTail/PriQueue    ;# interface queue type
 set val(ll)     LL                         ;# link layer type
 set val(ant)    Antenna/OmniAntenna        ;# antenna model
 set val(ifqlen) 50                         ;# max packet in ifq
-set val(nn)     3                          ;# number of mobilenodes
+set val(nn)     7                          ;# number of mobilenodes
 set val(rp)     AODV                       ;# routing protocol
-set val(x)      100                        ;# X dimension of topography
-set val(y)      100                        ;# Y dimension of topography
+set val(x)      800                        ;# X dimension of topography
+set val(y)      541                        ;# Y dimension of topography
 set val(stop)   100.0                      ;# time of simulation end
 
 #===================================
@@ -54,42 +68,63 @@ $ns node-config -adhocRouting  $val(rp) \
 #===================================
 #        Nodes Definition        
 #===================================
-#Create 3 nodes
+#Create 7 nodes
 set n0 [$ns node]
-$n0 set X_ 200
-$n0 set Y_ 100
+$n0 set X_ 99
+$n0 set Y_ 299
 $n0 set Z_ 0.0
 $ns initial_node_pos $n0 20
-set n2 [$ns node]
-$n2 set X_ 250
-$n2 set Y_ 250
-$n2 set Z_ 0.0
-$ns initial_node_pos $n2 20
 set n1 [$ns node]
-$n1 set X_ 200
-$n1 set Y_ 400
+$n1 set X_ 299
+$n1 set Y_ 297
 $n1 set Z_ 0.0
 $ns initial_node_pos $n1 20
+set n2 [$ns node]
+$n2 set X_ 499
+$n2 set Y_ 298
+$n2 set Z_ 0.0
+$ns initial_node_pos $n2 20
+set n3 [$ns node]
+$n3 set X_ 700
+$n3 set Y_ 299
+$n3 set Z_ 0.0
+$ns initial_node_pos $n3 20
+set n4 [$ns node]
+$n4 set X_ 199
+$n4 set Y_ 350
+$n4 set Z_ 0.0
+$ns initial_node_pos $n4 20
+set n5 [$ns node]
+$n5 set X_ 599
+$n5 set Y_ 350
+$n5 set Z_ 0.0
+$ns initial_node_pos $n5 20
+set n6 [$ns node]
+$n6 set X_ 600
+$n6 set Y_ 200
+$n6 set Z_ 0.0
+$ns initial_node_pos $n6 20
+
 
 # Node 5 is given RED Color and a label- indicating it is a Blackhole Attacker
-$n2 color red
-$ns at 0.0 "$n2 color red"
-$ns at 0.0 "$n2 label Attacker"
+$n5 color red
+$ns at 0.0 "$n5 color red"
+$ns at 0.0 "$n5 label Attacker"
 
 # Node 0 is given GREEN Color and a label - acts as a Source Node
 $n0 color green
 $ns at 0.0 "$n0 color green"
-$ns at 0.0 "$n0 label Source"
+$ns at 0.0 "$n0 label Destination"
 
 # Node 3 is given BLUE Color and a label- acts as a Destination Node
-$n1 color blue
-$ns at 0.0 "$n1 color blue"
-$ns at 0.0 "$n1 label Destination"
+$n3 color blue
+$ns at 0.0 "$n3 color blue"
+$ns at 0.0 "$n3 label Source"
 
 #===================================
 #    	Set node 5 as attacker    	 
 #===================================
-$ns at 0.0 "$n2 set ragent_ hacker"
+#$ns at 0.0 "[$n5 set ragent_] hacker"
 
 #===================================
 #        Agents Definition        
@@ -97,45 +132,11 @@ $ns at 0.0 "$n2 set ragent_ hacker"
 #Setup a UDP connection
 set udp0 [new Agent/UDP]
 $ns attach-agent $n0 $udp0
-set null0 [new Agent/Null]
-$ns attach-agent $n1 $null0
-$ns connect $udp0 $null0
+set null1 [new Agent/Null]
+$ns attach-agent $n3 $null1
+$ns connect $udp0 $null1
 $udp0 set packetSize_ 1500
 
-set udp01 [new Agent/UDP]
-$ns attach-agent $n1 $udp01
-set null01 [new Agent/Null]
-$ns attach-agent $n0 $null01
-$ns connect $udp01 $null01
-$udp01 set packetSize_ 1500
-
-set udp1 [new Agent/UDP]
-$ns attach-agent $n1 $udp1
-set null1 [new Agent/Null]
-$ns attach-agent $n2 $null1
-$ns connect $udp1 $null1
-$udp1 set packetSize_ 1500
-
-set udp11 [new Agent/UDP]
-$ns attach-agent $n2 $udp11
-set null11 [new Agent/Null]
-$ns attach-agent $n1 $null11
-$ns connect $udp11 $null11
-$udp11 set packetSize_ 1500
-
-set udp2 [new Agent/UDP]
-$ns attach-agent $n2 $udp2
-set null2 [new Agent/Null]
-$ns attach-agent $n0 $null2
-$ns connect $udp2 $null2
-$udp2 set packetSize_ 1500
-
-set udp21 [new Agent/UDP]
-$ns attach-agent $n0 $udp21
-set null21 [new Agent/Null]
-$ns attach-agent $n2 $null21
-$ns connect $udp21 $null21
-$udp21 set packetSize_ 1500
 #===================================
 #        Applications Definition        
 #===================================
@@ -148,46 +149,6 @@ $cbr0 set random_ null
 $ns at 1.0 "$cbr0 start"
 $ns at 100.0 "$cbr0 stop"
 
-set cbr01 [new Application/Traffic/CBR]
-$cbr01 attach-agent $udp01
-$cbr01 set packetSize_ 1000
-$cbr01 set rate_ 0.1Mb
-$cbr01 set random_ null
-$ns at 1.0 "$cbr01 start"
-$ns at 100.0 "$cbr01 stop"
-
-set cbr1 [new Application/Traffic/CBR]
-$cbr1 attach-agent $udp1
-$cbr1 set packetSize_ 1000
-$cbr1 set rate_ 0.1Mb
-$cbr1 set random_ null
-$ns at 1.0 "$cbr1 start"
-$ns at 100.0 "$cbr1 stop"
-
-set cbr11 [new Application/Traffic/CBR]
-$cbr11 attach-agent $udp11
-$cbr11 set packetSize_ 1000
-$cbr11 set rate_ 0.1Mb
-$cbr11 set random_ null
-$ns at 1.0 "$cbr11 start"
-$ns at 100.0 "$cbr11 stop"
-
-set cbr2 [new Application/Traffic/CBR]
-$cbr2 attach-agent $udp2
-$cbr2 set packetSize_ 1000
-$cbr2 set rate_ 0.1Mb
-$cbr2 set random_ null
-$ns at 1.0 "$cbr2 start"
-$ns at 100.0 "$cbr2 stop"
-
-set cbr21 [new Application/Traffic/CBR]
-$cbr21 attach-agent $udp21
-$cbr21 set packetSize_ 1000
-$cbr21 set rate_ 0.1Mb
-$cbr21 set random_ null
-$ns at 1.0 "$cbr21 start"
-$ns at 100.0 "$cbr21 stop"
-
 #===================================
 #        Termination        
 #===================================
@@ -197,7 +158,7 @@ proc finish {} {
     $ns flush-trace
     close $tracefile
     close $namfile
-    #exec nam blackhole.nam &
+    exec nam blackhole.nam &
     exit 0
 }
 for {set i 0} {$i < $val(nn) } { incr i } {
